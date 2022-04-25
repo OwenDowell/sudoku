@@ -9,10 +9,10 @@
 package sudoku.components;
 
 public class Board {
-    private Number[][] boardArray;
+    private Number[][] boardArray = new Number[9][9];
 
     public Board() {
-        this.boardArray = new Number[8][8];
+
     }
 
     /**
@@ -33,4 +33,6 @@ public class Board {
                 boardArray[i][j] = new Number(5);
         }
     }
+
+    public Number[][] getBoardArray() { return boardArray; }
 }
