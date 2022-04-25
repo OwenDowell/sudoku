@@ -51,5 +51,11 @@ public class Number {
         this.editability = true;
     }
 
+    public int getValue() { return value; }
+    public int getSolution() { return solution; }
 
+    public boolean isEditable() { return isEditable; }
+
+    public void setValue(int value) { this.value = value; }
+    public void setSolution(int solution) { this.solution = solution; }
 }
