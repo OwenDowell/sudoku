@@ -81,23 +81,11 @@ public class Board {
      * @return whether or not the number was found
      */
     public boolean check3x3(int block, int number) {
-        int i, j, k, l;
-        switch (block) {
-            case 0: i = 0; j = 0; break;
-            case 1: i = 0; j = 3; break;
-            case 2: i = 0; j = 6; break;
-            case 3: i = 3; j = 0; break;
-            case 4: i = 3; j = 3; break;
-            case 5: i = 3; j = 6; break;
-            case 6: i = 6; j = 0; break;
-            case 7: i = 6; j = 3; break;
-            case 8: i = 6; j = 6; break;
-            default: return false;
-        }
+        int[] coordinates = get3x3Coordinates(block);
 
-        for (k = 0; k < 3; k++) {
-            for (l = 0; l < 3; l++) {
-                if (boardArray[i+k][j+l].getValue() == number) return true;
+        for (int k = 0; k < 3; k++) {
+            for (int l = 0; l < 3; l++) {
+                if (boardArray[coordinates[0]+k][coordinates[1]+l].getValue() == number) return true;
             }
         }
         return false;
@@ -132,6 +120,37 @@ public class Board {
             for (j = 0; j < boardArray[i].length; j++)
                 boardArray[i][j] = new Number(value);
         }
+    }
+
+    /**
+     * get3x3Coordinates:
+     *
+     * This method will calculate the coordinates of a specific
+     * 3x3 grid on the board and return the upper left corner.
+     *
+     * @param block is the block you want to select
+     *
+     * @return an array containing 2 ints, [0] is for i and [1]
+     *         is for j. Invalid block number will return 0,0.
+     */
+    public int[] get3x3Coordinates(int block) {
+        int i,j;
+        int[] coordinates = new int[2];
+        switch (block) {
+            case 0: i = 0; j = 0; break;
+            case 1: i = 0; j = 3; break;
+            case 2: i = 0; j = 6; break;
+            case 3: i = 3; j = 0; break;
+            case 4: i = 3; j = 3; break;
+            case 5: i = 3; j = 6; break;
+            case 6: i = 6; j = 0; break;
+            case 7: i = 6; j = 3; break;
+            case 8: i = 6; j = 6; break;
+            default: return coordinates;
+        }
+        coordinates[0] = i;
+        coordinates[1] = j;
+        return coordinates;
     }
 
     public Number[][] getBoardArray() { return boardArray; }
