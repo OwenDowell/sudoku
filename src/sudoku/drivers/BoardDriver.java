@@ -16,7 +16,11 @@ import sudoku.components.Board;
 public class BoardDriver {
     public static void main(String[] args) {
         Board board = new Board();
-        board.generate();
+        board.generate(5);
+        prettyPrint(board);
+    }
+
+    public static void prettyPrint(Board board) {
         int i,j;
         System.out.println("*-----------*");
         for (i = 0; i < board.getBoardArray().length; i++) {

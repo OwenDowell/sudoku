@@ -25,12 +25,24 @@ public class Board {
      * Each 3x3 square can have one occurance of numbers 1-9
      */
     public void generate() {
+
+    }
+
+    /**
+     * generate (overloaded):
+     *
+     * This generates a board with all numbers being set to the same
+     * value, which is specified by the value parameter.
+     *
+     * @param value is the value to set whole board to
+     */
+    public void generate(int value) {
         //for initial coding purposes, generate each number to
         //hold the number 5
         int i, j;
         for (i = 0; i < boardArray.length; i++) {
             for (j = 0; j < boardArray[i].length; j++)
-                boardArray[i][j] = new Number(5);
+                boardArray[i][j] = new Number(value);
         }
     }
 
