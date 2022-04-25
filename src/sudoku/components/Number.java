@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2022. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+package sudoku.components;
+
 /**
  * Enumerated type containing numbers for Sudoku
  *
@@ -6,7 +16,7 @@
  */
 public class Number {
     private int value = 0;
-    private int solution = 0;
+    private int solution;
     private boolean isEditable = false;
 
     /**
@@ -31,7 +41,7 @@ public class Number {
      * populated numbers when you generate the
      * board.
      *
-     * @param value
+     * @param value is the value to be set intially
      */
     public Number(int value) {
         //assert that the parameter value is a valid value
@@ -48,7 +58,7 @@ public class Number {
      */
     public void setBlank() {
         this.value = 0;
-        this.editability = true;
+        this.isEditable = true;
     }
 
     public int getValue() { return value; }

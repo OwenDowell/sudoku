@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022. Owen Dowell
+ */
+
+package sudoku;
+
 /**
  * main class for Sudoku.
  *
@@ -6,10 +12,10 @@
  */
 public class Sudoku {
     public static void main(String[] args) {
-        this.run();
+        run();
     }
 
-    public void run() {
-        return;
+    public static void run() {
+
     }
 }
