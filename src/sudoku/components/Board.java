@@ -109,15 +109,14 @@ public class Board {
      * Each 3x3 square can have one occurance of numbers 1-9
      */
     public void generate() {
-        int block = 0;
+        int block;
         int[] bc = new int[2];
         int row, column;
-        int currentNum = 1;
+        int currentNum;
         Random rand = new Random();
 
-        for (; currentNum <=9; currentNum++) {
-            block = 0;
-            for (; block < 9; block++) {
+        for (currentNum = 1; currentNum <=9; currentNum++) {
+            for (block = 0; block < 9; block++) {
                 bc = get3x3Coordinates(block);
 
                 do {
