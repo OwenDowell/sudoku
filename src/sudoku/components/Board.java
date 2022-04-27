@@ -8,10 +8,18 @@
 
 package sudoku.components;
 
+import java.util.Random;
+
 public class Board {
     private Number[][] boardArray = new Number[9][9];
 
     public Board() {
+        int i, j;
+        for (i = 0; i < boardArray.length; i++) {
+            for (j = 0; j < boardArray[i].length; j++) {
+                boardArray[i][j] = new Number();
+            }
+        }
 
     }
 
@@ -26,12 +34,12 @@ public class Board {
      *
      * @return whether or not the number was found
      */
-    public boolean checkRow(int row, int number) {
+    private boolean checkRow(int row, int number) {
         int i;
         for (i = 0; i < boardArray[row].length; i++) {
-            if (boardArray[row][i].getValue() == number) return true;
+            if (boardArray[row][i].getValue() == number) return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -45,12 +53,12 @@ public class Board {
      *
      * @return whether or not the number was found
      */
-    public boolean checkColumn(int column, int number) {
+    private boolean checkColumn(int column, int number) {
         int i;
         for (i = 0; i < boardArray.length; i++) {
-            if (boardArray[i][column].getValue() == number) return true;
+            if (boardArray[i][column].getValue() == number) return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -80,15 +88,15 @@ public class Board {
      *
      * @return whether or not the number was found
      */
-    public boolean check3x3(int block, int number) {
+    private boolean check3x3(int block, int number) {
         int[] coordinates = get3x3Coordinates(block);
 
         for (int k = 0; k < 3; k++) {
             for (int l = 0; l < 3; l++) {
-                if (boardArray[coordinates[0]+k][coordinates[1]+l].getValue() == number) return true;
+                if (boardArray[coordinates[0]+k][coordinates[1]+l].getValue() == number) return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -101,7 +109,33 @@ public class Board {
      * Each 3x3 square can have one occurance of numbers 1-9
      */
     public void generate() {
+        int block = 0;
+        int[] bc = new int[2];
+        int row, column;
+        int currentNum = 1;
+        Random rand = new Random();
 
+        for (; currentNum <=9; currentNum++) {
+            block = 0;
+            for (; block < 9; block++) {
+                bc = get3x3Coordinates(block);
+
+                do {
+                    row = bc[0] + rand.nextInt(3);
+                    column = bc[1] + rand.nextInt(3);
+
+                } while (!boardArray[row][column].isBlank() //NOT BLANK
+                      || !checkRow(row, currentNum)         //INVALID ROW
+                      && !checkColumn(column, currentNum)); //INVALID COLUMN
+
+                boardArray[row][column].setValue(currentNum);
+                //if (boardArray[i+k][j+l].isBlank()) {
+                //    if (checkRow(i+k,currentNum) && checkColumn(j+l,currentNum)) {
+                //        boardArray[i+k][j+l].setValue(currentNum);
+                //    }
+                //}
+            }
+        }
     }
 
     /**
@@ -123,6 +157,21 @@ public class Board {
     }
 
     /**
+     * inputNumber:
+     *
+     * Inputs a number at a coordinate on the board.
+     *
+     * @param i selects the row
+     * @param j selects the column
+     * @param value sets the value of the location
+     */
+    public void inputNumber(int i, int j, int value) {
+        if ((i < 0 || i > boardArray.length) && (j < 0 || j > boardArray[0].length)) {
+            boardArray[i][j].setValue(value);
+        } else return;
+    }
+
+    /**
      * get3x3Coordinates:
      *
      * This method will calculate the coordinates of a specific
@@ -133,7 +182,7 @@ public class Board {
      * @return an array containing 2 ints, [0] is for i and [1]
      *         is for j. Invalid block number will return 0,0.
      */
-    public int[] get3x3Coordinates(int block) {
+    private int[] get3x3Coordinates(int block) {
         int i,j;
         int[] coordinates = new int[2];
         switch (block) {

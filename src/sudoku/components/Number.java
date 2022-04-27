@@ -57,6 +57,16 @@ public class Number {
         this.isEditable = true;
     }
 
+    /**
+     * isBlank:
+     *
+     * @return true if this number is truly blank,
+     *         meaning solution and value are both 0.
+     */
+    public boolean isBlank() {
+        return (this.value == 0) && (this.solution == 0);
+    }
+
     public int getValue() { return value; }
     public int getSolution() { return solution; }
 

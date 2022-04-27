@@ -18,6 +18,10 @@ public class BoardDriver {
         Board board = new Board();
         board.generate(5);
         prettyPrint(board);
+
+        board = new Board();
+        board.generate();
+        prettyPrint(board);
     }
 
     public static void prettyPrint(Board board) {
