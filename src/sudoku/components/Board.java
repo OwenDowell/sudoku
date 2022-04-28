@@ -109,23 +109,28 @@ public class Board {
      * Each 3x3 square can have one occurance of numbers 1-9
      */
     public void generate() {
-        int block;
+        int block = 0;
         int[] bc = new int[2];
         int row, column;
         int currentNum;
         Random rand = new Random();
 
         for (currentNum = 1; currentNum <=9; currentNum++) {
-            for (block = 0; block < 9; block++) {
+                block = 0;
                 bc = get3x3Coordinates(block);
-
+                row = bc[0] + rand.nextInt(3);
+                column = bc[1] + rand.nextInt(3);
                 do {
-                    row = bc[0] + rand.nextInt(3);
-                    column = bc[1] + rand.nextInt(3);
+                    if ((checkRow(row, currentNum) && checkColumn(column, currentNum)) && boardArray[row][column].isBlank()) {
+                        boardArray[row][column].setValue(currentNum);
+                        block++;
+                    }
+                    else {
+                        row = bc[0] + rand.nextInt(3);
+                        column = bc[1] + rand.nextInt(3);
+                    }
 
-                } while (!boardArray[row][column].isBlank() //NOT BLANK
-                      || !checkRow(row, currentNum)         //INVALID ROW
-                      && !checkColumn(column, currentNum)); //INVALID COLUMN
+                } while (block < 9); //INVALID COLUMN
 
                 boardArray[row][column].setValue(currentNum);
                 //if (boardArray[i+k][j+l].isBlank()) {
@@ -133,7 +138,6 @@ public class Board {
                 //        boardArray[i+k][j+l].setValue(currentNum);
                 //    }
                 //}
-            }
         }
     }
 
