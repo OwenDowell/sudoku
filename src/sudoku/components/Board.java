@@ -121,7 +121,8 @@ public class Board {
                 row = bc[0] + rand.nextInt(3);
                 column = bc[1] + rand.nextInt(3);
                 do {
-                    if ((checkRow(row, currentNum) && checkColumn(column, currentNum)) && boardArray[row][column].isBlank()) {
+                    bc = get3x3Coordinates(block);
+                    if (checkRow(row, currentNum) && checkColumn(column, currentNum) && boardArray[row][column].isBlank()) {
                         boardArray[row][column].setValue(currentNum);
                         block++;
                     }
@@ -129,10 +130,9 @@ public class Board {
                         row = bc[0] + rand.nextInt(3);
                         column = bc[1] + rand.nextInt(3);
                     }
-
                 } while (block < 9); //INVALID COLUMN
 
-                boardArray[row][column].setValue(currentNum);
+                //boardArray[row][column].setValue(currentNum);
                 //if (boardArray[i+k][j+l].isBlank()) {
                 //    if (checkRow(i+k,currentNum) && checkColumn(j+l,currentNum)) {
                 //        boardArray[i+k][j+l].setValue(currentNum);
