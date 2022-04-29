@@ -34,7 +34,7 @@ public class Board {
      *
      * @return whether or not the number was found
      */
-    private boolean checkRow(int row, int number) {
+    private boolean isRowValid(int row, int number) {
         int i;
         for (i = 0; i < boardArray[row].length; i++) {
             if (boardArray[row][i].getValue() == number) return false;
@@ -53,7 +53,7 @@ public class Board {
      *
      * @return whether or not the number was found
      */
-    private boolean checkColumn(int column, int number) {
+    private boolean isColumnValid(int column, int number) {
         int i;
         for (i = 0; i < boardArray.length; i++) {
             if (boardArray[i][column].getValue() == number) return false;
@@ -109,9 +109,8 @@ public class Board {
      * Each 3x3 square can have one occurance of numbers 1-9
      */
     public void generate() {
-        int block;
+        int block, row, column;
         int[] bc = new int[2];
-        int row, column;
         int currentNum;
         Random rand = new Random();
 
@@ -124,8 +123,8 @@ public class Board {
                     column = bc[1] + rand.nextInt(3);
 
                 } while (!boardArray[row][column].isBlank() //NOT BLANK
-                      || !checkRow(row, currentNum)         //INVALID ROW
-                      && !checkColumn(column, currentNum)); //INVALID COLUMN
+                      || !isRowValid(row, currentNum)         //INVALID ROW
+                      && !isColumnValid(column, currentNum)); //INVALID COLUMN
 
                 boardArray[row][column].setValue(currentNum);
                 //if (boardArray[i+k][j+l].isBlank()) {
